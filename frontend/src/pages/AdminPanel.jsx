@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import ROLE from "../common/role";
 
 const AdminPanel = () => {
-  const user = useSelector((state) => state?.user?.user);
+  const user = useSelector(state => state?.user?.user);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(user?.role !== ROLE.ADMIN){
+      navigate("/")
+    }
+  },[user])
 
   return (
     <div className="min-h-[calc(100vh-120px)] md:flex hidden">
@@ -22,7 +30,7 @@ const AdminPanel = () => {
             )}
           </div>
           <p className="capitalize text-lg font-semibold">{user?.name}</p>
-          <p className="text-sm">{user.role}</p>
+          <p className="text-sm">{user?.role}</p>
         </div>
         <div>
         <nav className="grid p-4">

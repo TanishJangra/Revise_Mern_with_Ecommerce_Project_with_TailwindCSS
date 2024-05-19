@@ -5,15 +5,17 @@ import summaryApi from "../common";
 import { toast } from 'react-toastify';
 
 const ChangeUserRole = ({name, email, role, onClose, userId, callFunc}) => {
-
+  console.log("name", name, "email", email, "role", role, "UserId", userId);
   const [userRole, setUserRole] = useState(role)
 
   const handleOnChangeSelect = (e) => {
+    console.log("e is ", e.target)
     setUserRole(e.target.value)
     console.log(e.target.value)
   }
 
   const updateUserRole = async () => {
+    console.log("userId", userId, "userrole ", userRole);
     const resp = await fetch(summaryApi.updateUser.url,{
       method: summaryApi.updateUser.method,
       credentials: 'include',
